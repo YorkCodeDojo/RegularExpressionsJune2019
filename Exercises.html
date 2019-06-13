@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>Rules</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <h1 id="regular-expressions-dojo">Regular Expressions Dojo</h1>
+<h1 id="rules">Rules</h1>
+<ol>
+<li>
+<p>You should work in pairs (or threes)</p>
+</li>
+<li>
+<p>You should complete the exercises using Test-Driven-Development (TDD)</p>
+</li>
+<li>
+<p>The refactoring stage is very important.  After each exercise discuss in your group alternative ways of solving the problem.  Re-write your solution if required.  The aim of tonight is not to complete all the exercises but think about different approaches.</p>
+</li>
+<li>
+<p>Within your group you should take it in terms to write the code.  One approach is to swap roles after each test.</p>
+</li>
+<li>
+<p>Don't use an existing regular expression library!</p>
+</li>
+<li>
+<p>Any doubt on how the expression is meant to work,  then test it out online,  for example use <a href="https://regex101.com/">https://regex101.com/</a></p>
+</li>
+<li>
+<p>The exercises intentionally don't cover the full regular expression language.</p>
+</li>
+<li>
+<p>Use Git/GitHub and regularly commit your changes.</p>
+</li>
+</ol>
+<h1 id="exercises">Exercises</h1>
+<h2 id="single-literals">Single Literals</h2>
+<p>The pattern <code>a</code> matches any string which contains the letter 'a'</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>123</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>abc</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+<p>e.g</p>
+<pre><code><div>  Assert(True,  Match('a', 'abc') )
+  Assert(False,  Match('d', 'abc') )
+</div></code></pre>
+<h2 id="multiple-literals">Multiple Literals</h2>
+<p>The pattern <code>david</code> matches any string which contains the word 'david'</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ab</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ab</code></td>
+<td>cde</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="starts-with-anchor">Starts with anchor</h2>
+<p>A <code>^</code> means the start of a string.  For example ^a will match abc but not cba</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^a</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>^b</code></td>
+<td>abc</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="ends-with-anchor">Ends with anchor</h2>
+<p>A <code>$</code> means the end of a string.  For example c$ will match abc but not cba</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c$</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a$</code></td>
+<td>abc</td>
+<td>Not Matched</td>
+</tr>
+<tr>
+<td><code>^abc$</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="or">OR</h2>
+<p>A <code>|</code> means OR.  For example a|b will match aaa and bbb but not ccc</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a|b</code></td>
+<td>a</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a|b</code></td>
+<td>abc</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a|b</code></td>
+<td>aaa</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a|b</code></td>
+<td>b</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a|b</code></td>
+<td>c</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="character-sets">Character Sets</h2>
+<p>Surrounding a rule with [] acts a bit like brackets in normal algebra.  For example <code>[a|b]c</code> will match <code>ac</code> and <code>bc</code> but not <code>cc</code></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[a|b]c</code></td>
+<td>abc</td>
+<td>Matched (on bc)</td>
+</tr>
+<tr>
+<td><code>[a|b]c</code></td>
+<td>bac</td>
+<td>Matched (on ac)</td>
+</tr>
+<tr>
+<td><code>[a|b]c</code></td>
+<td>a</td>
+<td>Not Matched</td>
+</tr>
+<tr>
+<td><code>[a|b]c</code></td>
+<td>c</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="quantifier">? Quantifier</h2>
+<p>? means 0 or 1 matches</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a?b</code></td>
+<td>ab</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>a?b</code></td>
+<td>b</td>
+<td>Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="quantifier-1">+ Quantifier</h2>
+<ul>
+<li>means 1 or many matches</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ca+b</code></td>
+<td>cb</td>
+<td>Not Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>cab</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>caab</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>caaab</td>
+<td>Matched</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="quantifier-2">* Quantifier</h2>
+<ul>
+<li>means 0 or many matches</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ca+b</code></td>
+<td>cb</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>cab</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>caab</td>
+<td>Matched</td>
+</tr>
+<tr>
+<td><code>ca+b</code></td>
+<td>b</td>
+<td>Not Matched</td>
+</tr>
+</tbody>
+</table>
+
+    </body>
+    </html>
